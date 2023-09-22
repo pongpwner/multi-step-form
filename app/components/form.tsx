@@ -5,11 +5,9 @@ export default function Form({
   method,
 }: formProps) {
   return (
-    <form
-      method={method}
-      action={action}
-      onSubmit={(e) => handleSubmit(e)}
-    ></form>
+    <form method={method} action={action} onSubmit={(e) => handleSubmit(e)}>
+      {children}
+    </form>
   );
 }
 
