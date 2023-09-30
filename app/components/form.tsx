@@ -3,9 +3,10 @@ export default function Form({
   handleSubmit,
   action,
   method,
+  id
 }: formProps) {
   return (
-    <form method={method} action={action} onSubmit={(e) => handleSubmit(e)}>
+    <form id={id.toString()} method={method} action={action} onSubmit={(e) => handleSubmit(e)}>
       {children}
     </form>
   );
@@ -16,4 +17,5 @@ type formProps = {
   handleSubmit: Function;
   method: "GET" | "POST";
   action: string;
+  id:number
 };
