@@ -3,7 +3,7 @@ import MultiStepForm from "./components/multi-step-form";
 
 export default function Home() {
   return (
-    <main className=" min-h-screen bg-blue-100">
+    <main className=" min-h-screen bg-indigo-100">
       <MultiStepForm></MultiStepForm>
     </main>
   );
