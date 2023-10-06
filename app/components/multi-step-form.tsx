@@ -19,6 +19,7 @@ export default function MultiStepForm() {
   //step 2 props
   const [on, setOn] = useState(true); //true=monthly false= yearly
   const [selectedPayment, setSelectedPayment] = useState(0);
+  //step 3 props
 
   function handleSubmit() {
     return;

@@ -1,4 +1,5 @@
 import Instructions from "./instructions";
+import { useState } from "react";
 export default function Checkbox({
   id,
   name,
@@ -8,7 +9,10 @@ export default function Checkbox({
 }: checkboxProps) {
   return (
     <label
-      className={`p-3 border-2 rounded-lg ${display ? "block" : "hidden"}`}
+      className={`p-3 border-2 rounded-lg ${
+        display ? "block" : "hidden"
+      } checkbox-label
+      `}
       htmlFor={id.toString()}
     >
       <span className="flex ">

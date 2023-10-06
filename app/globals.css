@@ -1,6 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@layer components {
+  .checkbox-label:has(input:checked) {
+    @apply border-purple-800 bg-purple-50 ;
+  }
+}
 
 :root {
   --foreground-rgb: 0, 0, 0;
