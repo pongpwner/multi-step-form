@@ -20,6 +20,7 @@ export default function MultiStepForm() {
   //step 2 props
   const [on, setOn] = useState(true); //true=monthly false= yearly
   const [selectedPayment, setSelectedPayment] = useState(0);
+  const [paymentCost, setPaymentCost] = useState(0);
   //step 3 props
   const [totalCost, setTotalCost] = useState(0);
   const [cost1, setCost1] = useState(0);
@@ -37,8 +38,8 @@ export default function MultiStepForm() {
     console.log(cost1);
     console.log(cost2);
     console.log(cost3);
-    setTotalCost(cost1 + cost2 + cost3);
-  }, [cost1, cost2, cost3]);
+    setTotalCost(cost1 + cost2 + cost3 + paymentCost);
+  }, [cost1, cost2, cost3, paymentCost]);
 
   function handleSubmit() {
     return;
@@ -69,7 +70,7 @@ export default function MultiStepForm() {
             <Heading>Select your plan</Heading>
 
             <Instructions>
-              You have the option of monthlu or yearly billing.
+              You have the option of monthly or yearly billing.
             </Instructions>
             <span className="flex flex-col gap-3 pt-5">
               <PaymentPlan
@@ -77,18 +78,20 @@ export default function MultiStepForm() {
                 setSelected={setSelectedPayment}
                 url={arcade}
                 name="Arcade"
-                cost="$9/mo"
+                cost={[9, 90]}
                 on={on}
                 id={1}
+                setPaymentCost={setPaymentCost}
               />
               <PaymentPlan
                 selected={selectedPayment}
                 setSelected={setSelectedPayment}
                 url={advanced}
                 name="Advanced"
-                cost="$12/mo"
+                cost={[12, 120]}
                 on={on}
                 id={2}
+                setPaymentCost={setPaymentCost}
               />
               <PaymentPlan
                 selected={selectedPayment}
@@ -96,8 +99,9 @@ export default function MultiStepForm() {
                 id={3}
                 url={pro}
                 name="Pro"
-                cost="$15/mo"
+                cost={[15, 150]}
                 on={on}
+                setPaymentCost={setPaymentCost}
               />
             </span>
             <TimeSelector on={on} setOn={setOn}></TimeSelector>
@@ -179,8 +183,23 @@ export default function MultiStepForm() {
             <Instructions>
               Double-check everything looks OK before confirming.
             </Instructions>
-            <Receipt paymentplan={selectedPayment} isMonthly={on}></Receipt>
-            <Instructions>{`${totalCost}`}</Instructions>
+            <Receipt
+              paymentplan={selectedPayment}
+              isMonthly={on}
+              checked1={checked1}
+              checked2={checked2}
+              checked3={checked3}
+              checked4={checked4}
+              checked5={checked5}
+              checked6={checked6}
+            ></Receipt>
+            <div className="flex justify-between">
+              <span className="text-gray-400 font-bold">
+                {`Total (per ${on ? "month" : "year"})`}
+              </span>
+
+              <span className="text-blue-700 font-bold">{`${totalCost}`}</span>
+            </div>
           </Section>
         </Form>
       </FormContainer>

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { useState } from "react";
 export default function PaymentPlan({
   url,
   name,
@@ -7,10 +8,19 @@ export default function PaymentPlan({
   id,
   selected,
   setSelected,
+  setPaymentCost,
 }: paymentPlanProps) {
+  function handleClick() {
+    setSelected(id);
+    if (on) {
+      setPaymentCost(cost[0]);
+    } else if (!on) {
+      setPaymentCost([1]);
+    }
+  }
   return (
     <div
-      onClick={() => setSelected(id)}
+      onClick={handleClick}
       className={`border-2 rounded-lg flex  p-3 gap-3 ${
         id === selected ? "border-indigo-300 bg-purple-50" : ""
       } `}
@@ -18,7 +28,9 @@ export default function PaymentPlan({
       <Image src={url} alt="icon" />
       <span className="flex flex-col">
         <span className="font-bold text-blue-900">{name}</span>
-        <span className="text-gray-400">{cost}</span>
+        <span className="text-gray-400">{`$${on ? cost[0] : cost[1]}/${
+          on ? "mo" : "yr"
+        }`}</span>
         {!on ? (
           <span className="text-sm text-blue-900">2 months free</span>
         ) : null}
@@ -30,9 +42,10 @@ export default function PaymentPlan({
 type paymentPlanProps = {
   url: HTMLImageElement;
   name: string;
-  cost: string;
+  cost: number[];
   on: boolean;
   id: number;
   setSelected: Function;
   selected: number;
+  setPaymentCost: Function;
 };
