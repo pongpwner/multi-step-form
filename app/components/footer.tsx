@@ -2,9 +2,8 @@ import { useEffect } from "react";
 const Footer = ({ formStep, setStep, checkValid1, valid1 }: FooterProps) => {
   async function handleClick() {
     let valid = await checkValid1();
-    if (valid) {
-      setStep((prev: number) => prev + 1);
-    }
+
+    setStep((prev: number) => prev + 1);
   }
   return (
     <footer className="absolute bottom-0 w-full bg-white p-4 h-20 flex justify-between">

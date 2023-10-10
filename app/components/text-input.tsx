@@ -14,12 +14,16 @@ export default function TextInput({
       </label>
       <input
         required
-        className={`p-2 border rounded-md  required:border-gray-300 required:invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500`}
+        className={`p-2 border rounded-md border-gray-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer focus:border-green-300 `}
         type={type}
         onChange={(e) => setValue(e.target.value)}
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
         id={id}
         placeholder={placeholder}
       />
+      <span className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+        Please enter a valid email address
+      </span>
     </span>
   );
 }
