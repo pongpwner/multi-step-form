@@ -71,8 +71,15 @@ export default function MultiStepForm() {
   }
 
   return (
-    <>
-      <FormContainer currentPage={step}>
+    <span className="sm:flex sm:justify-center sm:items-center sm:h-screen">
+      <FormContainer
+        currentPage={step}
+        formStep={step}
+        setStep={setStep}
+        checkValid1={checkValid1}
+        valid1={valid1}
+        mobile={false}
+      >
         <Form id={step} handleSubmit={handleSubmit} action="/" method="POST">
           <Section id={1} step={step}>
             <Heading>Personal info</Heading>
@@ -251,7 +258,8 @@ export default function MultiStepForm() {
         setStep={setStep}
         checkValid1={checkValid1}
         valid1={valid1}
+        mobile={true}
       ></Footer>
-    </>
+    </span>
   );
 }
