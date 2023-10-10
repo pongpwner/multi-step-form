@@ -17,6 +17,12 @@ import Section from "./section";
 import Receipt from "./receipt";
 export default function MultiStepForm() {
   const [step, setStep] = useState(1);
+  const [name, setName] = useState<string | null>(null);
+  const [number, setNumber] = useState<number | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [validName, setValidName] = useState(true);
+  const [validNumber, setValidNumber] = useState(true);
+  const [validEmail, setValidEmail] = useState(true);
   //step 2 props
   const [on, setOn] = useState(true); //true=monthly false= yearly
   const [selectedPayment, setSelectedPayment] = useState(0);
@@ -32,6 +38,25 @@ export default function MultiStepForm() {
   const [checked4, setChecked4] = useState(false);
   const [checked5, setChecked5] = useState(false);
   const [checked6, setChecked6] = useState(false);
+  //validation
+  const [valid1, setValid1] = useState<boolean | null>(null);
+  function checkValid1(): boolean {
+    let valid = true;
+    if (name === null) {
+      setValidName(false);
+      valid = false;
+    }
+    if (number === null) {
+      setValidName(false);
+      valid = false;
+    }
+    if (email === null) {
+      setValidEmail(false);
+      valid = false;
+    }
+    setValid1(true);
+    return valid;
+  }
 
   useEffect(() => {
     console.log(totalCost);
@@ -55,14 +80,32 @@ export default function MultiStepForm() {
             <Instructions>
               Please provide your name, email address, and phone number.
             </Instructions>
-            <TextInput id="Name" placeholder="e.g. Stephen King"></TextInput>
+            <TextInput
+              id="Name"
+              placeholder="e.g. Stephen King"
+              type="text"
+              setValue={setName}
+              value={name}
+              isValid={validName}
+              setValid={setValidName}
+            ></TextInput>
             <TextInput
               id="Email Address"
               placeholder="e.g stephenking@lorem.com"
+              type="text"
+              setValue={setEmail}
+              value={email}
+              isValid={validEmail}
+              setValid={setValidEmail}
             ></TextInput>
             <TextInput
               id="Phone Number"
               placeholder="e.g +1 234 567 890"
+              type="number"
+              setValue={setNumber}
+              value={number}
+              isValid={validNumber}
+              setValid={setValidNumber}
             ></TextInput>
           </Section>
 
@@ -203,7 +246,12 @@ export default function MultiStepForm() {
           </Section>
         </Form>
       </FormContainer>
-      <Footer formStep={step} setStep={setStep}></Footer>
+      <Footer
+        formStep={step}
+        setStep={setStep}
+        checkValid1={checkValid1}
+        valid1={valid1}
+      ></Footer>
     </>
   );
 }

@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-const Footer = ({ formStep, setStep }: FooterProps) => {
+const Footer = ({ formStep, setStep, checkValid1, valid1 }: FooterProps) => {
+  async function handleClick() {
+    let valid = await checkValid1();
+    if (valid) {
+      setStep((prev: number) => prev + 1);
+    }
+  }
   return (
     <footer className="absolute bottom-0 w-full bg-white p-4 h-20 flex justify-between">
       {formStep > 1 ? (
@@ -19,7 +25,7 @@ const Footer = ({ formStep, setStep }: FooterProps) => {
       <button
         type="button"
         onClick={() => {
-          setStep((prev: number) => prev + 1);
+          handleClick;
         }}
       >
         <input
@@ -36,6 +42,8 @@ const Footer = ({ formStep, setStep }: FooterProps) => {
 type FooterProps = {
   formStep: number;
   setStep: Function;
+  checkValid1: Function;
+  valid1: boolean | null;
 };
 
 export default Footer;
