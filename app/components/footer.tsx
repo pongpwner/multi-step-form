@@ -14,10 +14,13 @@ const Footer = ({
   return (
     <footer
       className={`${
-        mobile ? "absolute" : "flex"
+        mobile ? "absolute" : "hidden"
       } bottom-0 w-full bg-white p-4 h-20 flex justify-between ${
         mobile ? "sm:hidden" : ""
-      } `}
+      } 
+      ${!mobile ? "sm:flex" : ""} 
+      
+      `}
     >
       {formStep > 1 ? (
         <button
