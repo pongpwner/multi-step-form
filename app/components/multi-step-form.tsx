@@ -15,6 +15,7 @@ import TimeSelector from "./time-selector";
 import Checkbox from "./checkbox";
 import Section from "./section";
 import Receipt from "./receipt";
+import Thanks from "./thank";
 export default function MultiStepForm() {
   const [step, setStep] = useState(1);
   const [name, setName] = useState<string | null>(null);
@@ -70,7 +71,14 @@ export default function MultiStepForm() {
     setTotalCost(cost1 + cost2 + cost3 + paymentCost);
   }, [cost1, cost2, cost3, paymentCost]);
 
-  function handleSubmit() {
+  function handleSubmit(e: SubmitEvent) {
+    e.preventDefault();
+    let submit = true;
+    if (submit == true) {
+      setStep(5);
+    } else {
+      alert("cannot submit");
+    }
     return;
   }
 
@@ -85,7 +93,12 @@ export default function MultiStepForm() {
         checkValid3={checkValid3}
         mobile={false}
       >
-        <Form id={step} handleSubmit={handleSubmit} action="/" method="POST">
+        <Form
+          id={step}
+          handleSubmit={(e: SubmitEvent) => handleSubmit(e)}
+          action="/"
+          method="POST"
+        >
           <Section id={1} step={step}>
             <Heading>Personal info</Heading>
 
@@ -256,16 +269,22 @@ export default function MultiStepForm() {
               <span className="text-blue-700 font-bold">{`${totalCost}`}</span>
             </div>
           </Section>
+
+          <Section id={5} step={step}>
+            <Thanks></Thanks>
+          </Section>
         </Form>
       </FormContainer>
-      <Footer
-        formStep={step}
-        setStep={setStep}
-        checkValid1={checkValid1}
-        mobile={true}
-        checkValid2={checkValid2}
-        checkValid3={checkValid3}
-      ></Footer>
+      {step != 5 ? (
+        <Footer
+          formStep={step}
+          setStep={setStep}
+          checkValid1={checkValid1}
+          mobile={true}
+          checkValid2={checkValid2}
+          checkValid3={checkValid3}
+        ></Footer>
+      ) : null}
     </span>
   );
 }

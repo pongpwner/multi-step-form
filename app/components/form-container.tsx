@@ -12,7 +12,7 @@ export default function FormContainer({
   mobile,
 }: formContainerProps) {
   return (
-    <div className="p-4 bg-mobile bg-white max-w-[900px] bg-contain bg-no-repeat pt-6 sm:flex sm:bg-none sm-w-[1000px] sm:rounded-lg">
+    <div className="p-4 bg-mobile sm:bg-white max-w-[900px] bg-contain bg-no-repeat pt-6 sm:flex sm:bg-none sm-w-[1000px] sm:rounded-lg">
       <span className=" sm:bg-cover sm:bg-no-repeat sm:bg-desktop sm:h-[480px] sm:w-56 sm:p-6 sm:mx-auto sm:rounded-lg ">
         <ol
           className={`pb-10 flex gap-6 justify-center  text-white sm:flex-col  `}
@@ -81,14 +81,16 @@ export default function FormContainer({
       </span>
       <div className="bg-white rounded-xl max-w-xl p-5 sm:px-20 sm:py-5 sm:flex sm:flex-col sm:justify-between">
         <>{children}</>
-        <Footer
-          formStep={formStep}
-          setStep={setStep}
-          checkValid1={checkValid1}
-          checkValid3={checkValid3}
-          mobile={false}
-          checkValid2={checkValid2}
-        ></Footer>
+        {currentPage != 5 ? (
+          <Footer
+            formStep={formStep}
+            setStep={setStep}
+            checkValid1={checkValid1}
+            checkValid3={checkValid3}
+            mobile={false}
+            checkValid2={checkValid2}
+          ></Footer>
+        ) : null}
       </div>
     </div>
   );
