@@ -49,11 +49,18 @@ export default function MultiStepForm() {
 
     return valid;
   }
-  const [valid2, setValid2] = useState<boolean>(false);
+
   function checkValid2(): boolean {
     console.log(selectedPayment);
     let valid = false;
     if (selectedPayment > 0) {
+      valid = true;
+    }
+    return valid;
+  }
+  function checkValid3(): boolean {
+    let valid = false;
+    if (checked1 || checked2 || checked3 || checked4 || checked5 || checked6) {
       valid = true;
     }
     return valid;
@@ -75,7 +82,7 @@ export default function MultiStepForm() {
         setStep={setStep}
         checkValid1={checkValid1}
         checkValid2={checkValid2}
-        valid1={valid1}
+        checkValid3={checkValid3}
         mobile={false}
       >
         <Form id={step} handleSubmit={handleSubmit} action="/" method="POST">
@@ -255,9 +262,9 @@ export default function MultiStepForm() {
         formStep={step}
         setStep={setStep}
         checkValid1={checkValid1}
-        valid1={valid1}
         mobile={true}
         checkValid2={checkValid2}
+        checkValid3={checkValid3}
       ></Footer>
     </span>
   );

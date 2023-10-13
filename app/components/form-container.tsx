@@ -7,7 +7,8 @@ export default function FormContainer({
   setStep,
   checkValid1,
   checkValid2,
-  valid1,
+  checkValid3,
+
   mobile,
 }: formContainerProps) {
   return (
@@ -84,7 +85,7 @@ export default function FormContainer({
           formStep={formStep}
           setStep={setStep}
           checkValid1={checkValid1}
-          valid1={valid1}
+          checkValid3={checkValid3}
           mobile={false}
           checkValid2={checkValid2}
         ></Footer>
@@ -96,11 +97,10 @@ export default function FormContainer({
 type formContainerProps = {
   children: any;
   currentPage: Number;
-
+  mobile: boolean;
   formStep: number;
   setStep: Function;
   checkValid1: Function;
   checkValid2: Function;
-  valid1: boolean | null;
-  mobile: boolean;
+  checkValid3: Function;
 };
