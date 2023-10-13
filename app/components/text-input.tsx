@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 export default function TextInput({
   id,
   placeholder,
@@ -7,6 +8,19 @@ export default function TextInput({
   isValid,
   setValid,
 }: textInputProps) {
+  const [untouched, setUntouched] = useState(true);
+  useEffect(() => {
+    if (value === null) {
+    } else if (value!.toString().length === 0) {
+      setValid(false);
+    } else {
+      if (!isValid) {
+        setValid(true);
+      }
+    }
+    console.log(isValid);
+    console.log(value);
+  }, [value]);
   return (
     <span className="pb-4 flex flex-col">
       <label className="text-blue-900" htmlFor={id}>
@@ -14,14 +28,26 @@ export default function TextInput({
       </label>
       <input
         required
-        className={`p-2 border rounded-md border-gray-300 invalid:[&:not(:placeholder-shown):not(:focus)]:border-red-500 peer focus:border-green-300 `}
+        className={`p-2 border rounded-md border-gray-300 ${
+          !untouched && !isValid ? "border-red-500 peer" : ""
+        } `}
         type={type}
-        onChange={(e) => setValue(e.target.value)}
-        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+        onChange={(e) => {
+          if (untouched) {
+            setUntouched(false);
+          }
+
+          setValue(e.target.value);
+        }}
         id={id}
         placeholder={placeholder}
       />
-      <span className="mt-2 hidden text-sm text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+      <span
+        className={`mt-2 text-sm text-red-500  ${
+          !untouched && !isValid ? "block" : "hidden"
+        }
+          `}
+      >
         Please enter a valid email address
       </span>
     </span>

@@ -6,6 +6,7 @@ export default function FormContainer({
   formStep,
   setStep,
   checkValid1,
+  checkValid2,
   valid1,
   mobile,
 }: formContainerProps) {
@@ -77,7 +78,7 @@ export default function FormContainer({
           </li>
         </ol>
       </span>
-      <div className="bg-white rounded-xl max-w-xl p-5 sm:px-20 sm:py-10 sm:flex sm:flex-col sm:justify-between">
+      <div className="bg-white rounded-xl max-w-xl p-5 sm:px-20 sm:py-5 sm:flex sm:flex-col sm:justify-between">
         <>{children}</>
         <Footer
           formStep={formStep}
@@ -85,6 +86,7 @@ export default function FormContainer({
           checkValid1={checkValid1}
           valid1={valid1}
           mobile={false}
+          checkValid2={checkValid2}
         ></Footer>
       </div>
     </div>
@@ -98,6 +100,7 @@ type formContainerProps = {
   formStep: number;
   setStep: Function;
   checkValid1: Function;
+  checkValid2: Function;
   valid1: boolean | null;
   mobile: boolean;
 };

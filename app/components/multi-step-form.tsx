@@ -20,13 +20,14 @@ export default function MultiStepForm() {
   const [name, setName] = useState<string | null>(null);
   const [number, setNumber] = useState<number | null>(null);
   const [email, setEmail] = useState<string | null>(null);
-  const [validName, setValidName] = useState(true);
-  const [validNumber, setValidNumber] = useState(true);
-  const [validEmail, setValidEmail] = useState(true);
+  const [validName, setValidName] = useState(false);
+  const [validNumber, setValidNumber] = useState(false);
+  const [validEmail, setValidEmail] = useState(false);
   //step 2 props
   const [on, setOn] = useState(true); //true=monthly false= yearly
   const [selectedPayment, setSelectedPayment] = useState(0);
   const [paymentCost, setPaymentCost] = useState(0);
+  const [validSelectedPayment, setValidSelectedPayment] = useState(0);
   //step 3 props
   const [totalCost, setTotalCost] = useState(0);
   const [cost1, setCost1] = useState(0);
@@ -41,28 +42,24 @@ export default function MultiStepForm() {
   //validation
   const [valid1, setValid1] = useState<boolean | null>(null);
   function checkValid1(): boolean {
-    let valid = true;
-    if (name === null) {
-      setValidName(false);
-      valid = false;
+    let valid = false;
+    if (validName && validNumber && validEmail) {
+      valid = true;
     }
-    if (number === null) {
-      setValidName(false);
-      valid = false;
+
+    return valid;
+  }
+  const [valid2, setValid2] = useState<boolean>(false);
+  function checkValid2(): boolean {
+    console.log(selectedPayment);
+    let valid = false;
+    if (selectedPayment > 0) {
+      valid = true;
     }
-    if (email === null) {
-      setValidEmail(false);
-      valid = false;
-    }
-    setValid1(true);
     return valid;
   }
 
   useEffect(() => {
-    console.log(totalCost);
-    console.log(cost1);
-    console.log(cost2);
-    console.log(cost3);
     setTotalCost(cost1 + cost2 + cost3 + paymentCost);
   }, [cost1, cost2, cost3, paymentCost]);
 
@@ -77,6 +74,7 @@ export default function MultiStepForm() {
         formStep={step}
         setStep={setStep}
         checkValid1={checkValid1}
+        checkValid2={checkValid2}
         valid1={valid1}
         mobile={false}
       >
@@ -122,7 +120,7 @@ export default function MultiStepForm() {
             <Instructions>
               You have the option of monthly or yearly billing.
             </Instructions>
-            <span className="flex flex-col gap-3 pt-5">
+            <span className="flex flex-col gap-3 pt-5 sm:flex-row">
               <PaymentPlan
                 selected={selectedPayment}
                 setSelected={setSelectedPayment}
@@ -259,6 +257,7 @@ export default function MultiStepForm() {
         checkValid1={checkValid1}
         valid1={valid1}
         mobile={true}
+        checkValid2={checkValid2}
       ></Footer>
     </span>
   );
