@@ -18,8 +18,6 @@ export default function TextInput({
         setValid(true);
       }
     }
-    console.log(isValid);
-    console.log(value);
   }, [value]);
   return (
     <span className="pb-4 flex flex-col">
@@ -28,8 +26,8 @@ export default function TextInput({
       </label>
       <input
         required
-        className={`p-2 border rounded-md border-gray-300 ${
-          !untouched && !isValid ? "border-red-500 peer" : ""
+        className={`p-2 border-2 rounded-md  focus:border-purple-500 outline-none  ${
+          !untouched && !isValid ? "border-red-500" : ""
         } `}
         type={type}
         onChange={(e) => {
@@ -43,12 +41,12 @@ export default function TextInput({
         placeholder={placeholder}
       />
       <span
-        className={`mt-2 text-sm text-red-500  ${
+        className={`mt-2 text-sm text-red-500 font-bold  ${
           !untouched && !isValid ? "block" : "hidden"
         }
           `}
       >
-        Please enter a valid email address
+        This input field is required
       </span>
     </span>
   );

@@ -52,7 +52,6 @@ export default function MultiStepForm() {
   }
 
   function checkValid2(): boolean {
-    console.log(selectedPayment);
     let valid = false;
     if (selectedPayment > 0) {
       valid = true;
@@ -253,6 +252,7 @@ export default function MultiStepForm() {
             </Instructions>
             <Receipt
               paymentplan={selectedPayment}
+              paymentCost={paymentCost}
               isMonthly={on}
               checked1={checked1}
               checked2={checked2}
@@ -260,13 +260,16 @@ export default function MultiStepForm() {
               checked4={checked4}
               checked5={checked5}
               checked6={checked6}
+              on={on}
             ></Receipt>
             <div className="flex justify-between">
               <span className="text-gray-400 font-bold">
                 {`Total (per ${on ? "month" : "year"})`}
               </span>
 
-              <span className="text-blue-700 font-bold">{`${totalCost}`}</span>
+              <span className="text-blue-700 font-bold">{`+$${totalCost}/${
+                on ? "mo" : "yr"
+              }`}</span>
             </div>
           </Section>
 

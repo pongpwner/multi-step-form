@@ -3,8 +3,8 @@ export default function Slider({ on, setOn }: sliderProps) {
     <button
       type="button"
       onClick={() => setOn((prev: boolean) => !prev)}
-      className={`p-1 w-11 h-6 bg-blue-900 flex justify-${
-        on ? "start" : "end"
+      className={`p-1 w-11 h-6 bg-blue-900 flex  ${
+        on ? "justify-start" : "justify-end"
       } rounded-xl items-center`}
     >
       <span className="bg-white rounded-full w-4 h-4"></span>

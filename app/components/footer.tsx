@@ -11,7 +11,6 @@ const Footer = ({
   async function handleClick() {
     switch (formStep) {
       case 1:
-        console.log(1);
         let valid = await checkValid1();
         if (valid) {
           setStep((prev: number) => prev + 1);
@@ -19,20 +18,25 @@ const Footer = ({
         }
         break;
       case 2:
-        console.log("22222");
         let valid2 = checkValid2();
         if (valid2) {
           setStep((prev: number) => prev + 1);
         }
         break;
       case 3:
+        console.log("a");
         let valid3 = checkValid3();
         if (valid3) {
           setStep((prev: number) => prev + 1);
         }
         break;
+      case 4:
+        setStep((prev: number) => prev + 1);
+
+        break;
     }
   }
+
   return (
     <footer
       className={`${mobile ? "absolute" : "hidden"} bottom-0 w-full bg-white ${
@@ -55,12 +59,11 @@ const Footer = ({
       ) : (
         <span className="w-1 h-1"></span>
       )}
-
-      <button type="button" onClick={handleClick}>
+      <button onClick={handleClick}>
         <input
           className={`bg-blue-900 text-white p-2 border rounded-md `}
           form={formStep.toString()}
-          type={`${formStep == 4 ? "submit" : "button"}`}
+          type={`${formStep == 5 ? "submit" : "button"}`}
           value={formStep == 4 ? "Confirm" : "Next Step"}
         />
       </button>

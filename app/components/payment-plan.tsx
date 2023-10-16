@@ -21,8 +21,8 @@ export default function PaymentPlan({
   return (
     <div
       onClick={handleClick}
-      className={`border-2 rounded-lg flex  p-3 gap-3  sm:flex-col flex-grow sm:gap-10${
-        id === selected ? "border-indigo-300 bg-purple-50" : ""
+      className={`border-2 rounded-lg flex  p-3 gap-3  sm:flex-col flex-grow sm:gap-10 ${
+        id === selected ? "border-purple-500 bg-purple-50 " : ""
       } `}
     >
       <Image src={url} alt="icon" />

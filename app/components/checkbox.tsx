@@ -14,7 +14,6 @@ export default function Checkbox({
     setChecked(!checked);
   }
   useEffect(() => {
-    console.log(cost);
     if (checked) {
       setCost(cost);
     } else {
