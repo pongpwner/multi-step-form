@@ -14,7 +14,6 @@ const Footer = ({
         let valid = await checkValid1();
         if (valid) {
           setStep((prev: number) => prev + 1);
-          console.log("step");
         }
         break;
       case 2:
@@ -24,7 +23,6 @@ const Footer = ({
         }
         break;
       case 3:
-        console.log("a");
         let valid3 = checkValid3();
         if (valid3) {
           setStep((prev: number) => prev + 1);
@@ -40,7 +38,7 @@ const Footer = ({
   return (
     <footer
       className={`${mobile ? "absolute" : "hidden"} bottom-0 w-full bg-white ${
-        mobile ? "p4" : "p0"
+        mobile ? "p-4" : "p-0"
       } h-20 flex justify-between ${mobile ? "sm:hidden" : ""} 
       ${!mobile ? "sm:flex" : ""} 
       ${!mobile ? "items:end" : ""}
